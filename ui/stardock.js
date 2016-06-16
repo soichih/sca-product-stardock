@@ -1,20 +1,19 @@
 (function() {
     'use strict';
 
-    var service = angular.module('sca-product-stardock', [ ]);
-    service.directive('scaProductStardock', ['toaster', '$http', '$timeout', 
-    function(toaster, $http, $timeout) {
+    var service = angular.module('sca-product-stardock', [ 'sca-wf', 'websh' ]);
+    service.directive('scaProductStardock', ['toaster', '$http', '$timeout', 'appconf', 'scaTask',
+    function(toaster, $http, $timeout, appconf, scaTask) {
         return {
             restrict: 'E',
             scope: {
                 taskid: '=',
-                path: '=', //if empty, it will be set to instantce_id / task_id
-                jwt: '=',
-                conf: '=', //need sca_api set
             }, 
             templateUrl: 'bower_components/sca-product-stardock/ui/stardock.html',
             link: function($scope, element) {
-                //nothing to do yet..
+                //console.dir(appconf);
+                $scope.jwt = localStorage.getItem(appconf.jwt_id);
+                $scope.task = scaTask.get($scope.taskid);
             }
         };
     }]);
