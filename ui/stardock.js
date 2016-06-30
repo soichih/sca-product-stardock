@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    var service = angular.module('sca-product-stardock', [ 'sca-wf', 'websh' ]);
+    var service = angular.module('sca-product-stardock', [ 'sca-ng-wf', 'websh' ]);
     service.directive('scaProductStardock', ['toaster', '$http', '$timeout', 'appconf', 'scaTask',
     function(toaster, $http, $timeout, appconf, scaTask) {
         return {
@@ -11,7 +11,6 @@
             }, 
             templateUrl: 'bower_components/sca-product-stardock/ui/stardock.html',
             link: function($scope, element) {
-                //console.dir(appconf);
                 $scope.jwt = localStorage.getItem(appconf.jwt_id);
                 $scope.task = scaTask.get($scope.taskid);
             }
